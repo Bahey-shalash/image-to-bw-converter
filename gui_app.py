@@ -119,9 +119,7 @@ class BWConverter(QWidget):
         self.setLayout(main_layout)
 
     def browse_input(self):
-        path, _ = QFileDialog.getOpenFileName(
-            self, "Select Input Image", "", "Images (*.png *.jpg *.bmp)"
-        )
+        path, _ = QFileDialog.getOpenFileName(self, "Select Input Image", "", "Images (*.png *.jpg *.jpeg *.bmp *.gif *.tga *.hdr *.psd *.pic *.ppm *.pgm);;All Files (*)")
         if path:
             self.input_edit.setText(path)
             pix = QPixmap(path).scaled(
