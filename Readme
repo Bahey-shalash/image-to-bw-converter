@@ -6,12 +6,13 @@ A powerful utility to convert color images (PNG, JPEG, BMP, etc.) into high-qual
 
 ## Features
 
-- ⚙️ Command-line tool for fast batch conversions
-- 🖼️ GUI with live input/output preview and adjustable threshold
-- 🧠 Accurate Floyd–Steinberg dithering
-- ⚡ Fast C backend with optional verbose output
+- ⚙️ Command-line tool for fast batch conversions  
+- 🖼️ GUI with live input/output preview and adjustable threshold  
+- 🧠 Accurate Floyd–Steinberg dithering  
+- ⚡ Fast C backend with optional verbose output  
 
 ---
+
 
 ## Project Structure
 
