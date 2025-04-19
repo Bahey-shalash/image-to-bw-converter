@@ -1,0 +1,108 @@
+# Image to BW Altium Converter
+
+Convert color images (PNG, JPEG, BMP, etc.) into 1‑bit black‑and‑white PNGs using Floyd–Steinberg error diffusion. The repo provides two interfaces:
+
+1. **NO_GUI**: a lightweight command‑line tool (`NO_GUI.c`)
+2. **GUI**: a PySide6 desktop application (`gui_app.py`) powered by a C shared library
+
+---
+
+## Repository Layout
+
+```
+.
+├── NO_GUI.c                   # CLI‑only converter (standalone)
+├── bw_converter.h/.c          # Shared‑library API & implementation
+├── gui_app.py                 # Python + PySide6 GUI frontend
+├── Makefile                   # Build rules for CLI & shared lib
+├── libbwconvert.so            # Generated shared library for GUI
+├── stb_image.h                # STB image loader header
+├── stb_image_write.h          # STB PNG writer header
+└── README.md                  # This file
+```
+
+---
+
+## Prerequisites
+
+### NO_GUI (CLI-only)
+- Any C compiler (GCC or Clang)
+
+### GUI version
+- Python 3.7+
+- PySide6
+
+Install with:
+```bash
+pip install PySide6
+```
+
+---
+
+## Building
+
+Run in project root:
+
+```bash
+make
+```
+
+- Builds `image_bw_converter` from `NO_GUI.c`.
+- Creates `libbwconvert.so` (shared library for the GUI).
+
+Clean up:
+
+```bash
+make clean
+```
+
+---
+
+## Command‑Line Usage
+
+Compile (via `make`), then:
+
+```bash
+./image_bw_converter [options] <input_image> <output.png>
+```
+
+**Options:**
+
+- `-t <threshold>`  brightness cutoff (0–255, default: 128)
+- `-i`             invert black/white after dithering
+- `-v`             verbose mode (logs progress)
+- `-h`             show help
+- `--version`      show version
+
+**Examples:**
+
+```bash
+./image_bw_converter input.jpg output.png
+./image_bw_converter -t 100 -i -v photo.jpg result.png
+```
+
+---
+
+## GUI Usage
+
+Ensure `libbwconvert.so` exists (run `make`), then:
+
+```bash
+python gui_app.py
+```
+
+1. **Input Image**: Browse and select your image.
+2. **Output PNG**: Choose where to save.
+3. **Threshold**: Adjust slider (0–255).
+4. **Invert output** / **Verbose mode**: Toggle as needed.
+5. **Convert**: Click to run conversion.
+6. **Preview**: See input and output images side by side.
+
+---
+
+## License
+
+MIT License. See `LICENSE` or add your preferred terms.
+
+Enjoy converting your images!
+
