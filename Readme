@@ -1,23 +1,29 @@
 # Image to BW Altium Converter
 
-Convert color images (PNG, JPEG, BMP, etc.) into 1‑bit black‑and‑white PNGs using Floyd–Steinberg error diffusion. The repo provides two interfaces:
-
-1. **NO_GUI**: a lightweight command‑line tool (`NO_GUI.c`)
-2. **GUI**: a PySide6 desktop application (`gui_app.py`) powered by a C shared library
+A powerful utility to convert color images (PNG, JPEG, BMP, etc.) into high-quality 1-bit black-and-white PNGs using Floyd–Steinberg error diffusion. This repository provides both a simple CLI tool and a modern GUI frontend.
 
 ---
 
-## Repository Layout
+## Features
+
+- ⚙️ Command-line tool for fast batch conversions
+- 🖼️ GUI with live input/output preview and adjustable threshold
+- 🧠 Accurate Floyd–Steinberg dithering
+- ⚡ Fast C backend with optional verbose output
+
+---
+
+## Project Structure
 
 ```
 .
-├── NO_GUI.c                   # CLI‑only converter (standalone)
-├── bw_converter.h/.c          # Shared‑library API & implementation
-├── gui_app.py                 # Python + PySide6 GUI frontend
-├── Makefile                   # Build rules for CLI & shared lib
-├── libbwconvert.so            # Generated shared library for GUI
-├── stb_image.h                # STB image loader header
-├── stb_image_write.h          # STB PNG writer header
+├── NO_GUI.c                   # Command-line image converter
+├── bw_converter.h/.c          # Shared C backend for conversion
+├── gui_app.py                 # PySide6-based desktop GUI
+├── Makefile                   # Build system
+├── libbwconvert.so            # Shared object (built)
+├── stb_image.h                # STB image loader
+├── stb_image_write.h          # STB image writer
 └── README.md                  # This file
 ```
 
@@ -25,32 +31,32 @@ Convert color images (PNG, JPEG, BMP, etc.) into 1‑bit black‑and‑white PNG
 
 ## Prerequisites
 
-### NO_GUI (CLI-only)
-- Any C compiler (GCC or Clang)
+### CLI version (NO\_GUI)
+
+- GCC or Clang
 
 ### GUI version
+
 - Python 3.7+
 - PySide6
 
-Install with:
+Install GUI requirements:
+
 ```bash
 pip install PySide6
 ```
 
 ---
 
-## Building
+## Build Instructions
 
-Run in project root:
+To build the CLI and shared library:
 
 ```bash
 make
 ```
 
-- Builds `image_bw_converter` from `NO_GUI.c`.
-- Creates `libbwconvert.so` (shared library for the GUI).
-
-Clean up:
+To clean all compiled artifacts:
 
 ```bash
 make clean
@@ -58,23 +64,29 @@ make clean
 
 ---
 
-## Command‑Line Usage
+## CLI Usage
 
-Compile (via `make`), then:
+First, build the CLI tool:
+
+```bash
+gcc -O3 NO_GUI.c -o image_bw_converter
+```
+
+Then run it using:
 
 ```bash
 ./image_bw_converter [options] <input_image> <output.png>
 ```
 
-**Options:**
+### Options:
 
-- `-t <threshold>`  brightness cutoff (0–255, default: 128)
-- `-i`             invert black/white after dithering
-- `-v`             verbose mode (logs progress)
-- `-h`             show help
-- `--version`      show version
+- `-t <threshold>`  Brightness cutoff (0–255, default: 128)
+- `-i`              Invert black/white after dithering
+- `-v`              Enable verbose output
+- `-h`              Show help message
+- `--version`       Show version information
 
-**Examples:**
+### Examples:
 
 ```bash
 ./image_bw_converter input.jpg output.png
@@ -85,24 +97,28 @@ Compile (via `make`), then:
 
 ## GUI Usage
 
-Ensure `libbwconvert.so` exists (run `make`), then:
+After building, launch the graphical interface:
 
 ```bash
 python gui_app.py
 ```
 
-1. **Input Image**: Browse and select your image.
-2. **Output PNG**: Choose where to save.
-3. **Threshold**: Adjust slider (0–255).
-4. **Invert output** / **Verbose mode**: Toggle as needed.
-5. **Convert**: Click to run conversion.
-6. **Preview**: See input and output images side by side.
+### GUI Features:
+
+- Browse and select **Input Image**
+- Specify **Output PNG** file path
+- Adjust **Threshold** using slider
+- Toggle **Invert Output** and **Verbose Mode**
+- View **Input** and **Output** previews side by side
+- Click **Convert** to process
 
 ---
 
 ## License
 
-MIT License. See `LICENSE` or add your preferred terms.
+MIT License. See `LICENSE` or apply your own.
 
-Enjoy converting your images!
+---
+
+Happy converting! 🎨
 
