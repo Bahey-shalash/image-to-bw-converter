@@ -1,3 +1,4 @@
+
 # Image to BW Altium Converter
 
 A powerful utility to convert color images (PNG, JPEG, BMP, etc.) into high-quality 1-bit black-and-white PNGs using Floyd–Steinberg error diffusion. This repository provides both a simple CLI tool and a modern GUI frontend.
